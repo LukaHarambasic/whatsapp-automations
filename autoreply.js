@@ -3,12 +3,14 @@ import { chromium } from "playwright";
 const WHATSAPP_URL = "https://web.whatsapp.com";
 const USER_DATA_DIR = "./browser-profile";
 const MESSAGE =
-  "Hey! I'm no longer using WhatsApp. Please contact me on Signal instead.";
+  "Hey! I'm no longer using WhatsApp. Please contact me on Signal instead. If you get this in this moment I'm programming this automation 🤷🏻";
 
-async function sendWhatsAppNotice() {
+async function sendMessage() {
+  console.log("sendMessage");
   const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
-    headless: true,
+    headless: false,
   });
+  console.log("Browser initialised");
   const page = await context.newPage();
   await page.goto(WHATSAPP_URL, { waitUntil: "domcontentloaded" });
 
@@ -83,8 +85,9 @@ async function sendWhatsAppNotice() {
 
 (async () => {
   try {
-    await sendWhatsAppNotice();
+    await sendMessage();
   } catch (err) {
     console.error("Something went wrong:", err);
+    await context.close();
   }
 })();
