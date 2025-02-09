@@ -1,5 +1,7 @@
 # Whatsapp Automations
 
+> This project works, but it seems like WhatsApp has something in place to detect if the QR code was screenshotet and therefore doesn't accept it...
+
 ## Auto reply
 
 _Dev_
