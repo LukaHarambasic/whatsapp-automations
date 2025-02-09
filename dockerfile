@@ -24,4 +24,3 @@ RUN chmod -R 777 /app/browser-profile /app/qr-codes \
     && chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["npm", "run", "autoreply"]
