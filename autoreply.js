@@ -7,7 +7,7 @@ const MESSAGE =
 
 async function sendWhatsAppNotice() {
   const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
-    headless: false,
+    headless: true,
   });
   const page = await context.newPage();
   await page.goto(WHATSAPP_URL, { waitUntil: "domcontentloaded" });
@@ -22,9 +22,13 @@ async function sendWhatsAppNotice() {
       { timeout: 10000 }
     );
   } catch (error) {
+    await page.screenshot({
+      path: `./qr-codes/${new Date().toISOString().replace(/[:.]/g, "-")}.png`,
+    });
     console.error(
-      "Not logged in or the expected page content is not loaded. Please open browser manually and link WhatsApp first."
+      "Not logged in or the expected page content is not loaded. A screenshot with the QR-code was taken, please scan it with your phone and try again."
     );
+    await context.close();
     return;
   }
 

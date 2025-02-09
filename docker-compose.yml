@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  whatsapp-automations:
+    build: .
+    network_mode: "host"
+    shm_size: "2gb"
+    volumes:
+      - ./qr-codes:/app/qr-codes
+      - ./browser-profile:/app/browser-profile
+    command: ["npm", "run", "autoreply"]
