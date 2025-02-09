@@ -8,10 +8,15 @@ const MESSAGE =
 async function sendMessage() {
   console.log("sendMessage");
   const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
-    headless: false,
+    headless: true,
   });
   console.log("Browser initialised");
   const page = await context.newPage();
+  await context.setExtraHTTPHeaders({
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+  });
+
   await page.goto(WHATSAPP_URL, { waitUntil: "domcontentloaded" });
 
   try {
